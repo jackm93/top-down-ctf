@@ -6,6 +6,9 @@ public class PlayerController : MonoBehaviour {
 
 	[SerializeField]
 	float speed;
+
+    [SerializeField]
+    List<Transform> spawnLocations;
 	
     private Rigidbody playerRB;
 
@@ -14,7 +17,6 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void FixedUpdate() {
-		
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
 
@@ -22,5 +24,16 @@ public class PlayerController : MonoBehaviour {
 
         playerRB.AddForce(movement * speed);
             
+    }
+
+    private void spawn() {
+        int randomLocation = Random.Range(0, spawnLocations.Count);
+        transform.position = spawnLocations[randomLocation].transform.position;
+    }
+
+    public void KillPlayer() {
+        spawn();
+        playerRB.velocity = Vector3.zero;
+        playerRB.angularVelocity = Vector3.zero;
     }
 }
