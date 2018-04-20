@@ -6,8 +6,12 @@ public class DeathZoneTrigger : MonoBehaviour {
 
     void OnTriggerEnter(Collider other) {
         if (other.gameObject.tag == "Player") {
-            //Respawn Player
-            Debug.Log("Player Loses!!!");
+            playerRespawn(other.gameObject);
         }
+    }
+
+    void playerRespawn(GameObject player) {
+        PlayerController controller = player.GetComponent("PlayerController") as PlayerController;
+        controller.KillPlayer();
     }
 }
